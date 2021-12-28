@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/bottlezz/sango-ws#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "ws": "^8.4.0"
   }
 }
