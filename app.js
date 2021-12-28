@@ -1,25 +1,22 @@
-// const express = require('express')
-// const app = express()
-// const port = process.env.PORT || 3000
-import { WebSocketServer } from 'ws';
+import express from 'express';
+import { WebSocketServer  } from 'ws';
 
-const wss = new WebSocketServer({ port: 8080 });
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
 
-wss.on('connection', function connection(ws) {
-  ws.on('message', function message(data) {
-    console.log('received: %s', data);
-  });
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-  ws.send('something');
+const wss = new WebSocketServer({ server });
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('close', () => console.log('Client disconnected'));
 });
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
-
-// app.listen(port, () => {
-//   console.log(`Example app listening at http://localhost:${port}`)
-// })
-
-
-
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    client.send(new Date().toTimeString());
+  });
+}, 1000);
