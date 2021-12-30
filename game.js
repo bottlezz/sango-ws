@@ -9,13 +9,15 @@ export class Seat {
     clientId =0; //socket id
 }
 export class Table {
-    players = [] //8 players
+    seats = [] //8 players
+    clinets = new Map(); //<clientId, seatid>
     draw = new Deck()
     discard = new Deck()
     empty = new Deck(); 
     constructor(){
         for(let i=0;i<8;i++){
-            this.players.push(new Seat());
+            this.seats.push(new Seat());
         }
     }
+    
 }
