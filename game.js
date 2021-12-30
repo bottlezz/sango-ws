@@ -1,7 +1,7 @@
 export class Deck {
     cards=[]; 
 }
-export class Player {
+export class Seat {
     heros = []; // int [] ying xiong
     hand = new Deck() // shou pai
     equip = new Deck() // zhuang bei
@@ -13,4 +13,9 @@ export class Table {
     draw = new Deck()
     discard = new Deck()
     empty = new Deck(); 
+    constructor(){
+        for(let i=0;i<8;i++){
+            this.players.push(new Seat());
+        }
+    }
 }
