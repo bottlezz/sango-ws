@@ -1,14 +1,15 @@
-export class Deck {
+
+class Deck {
     cards=[]; 
 }
-export class Seat {
+class Seat {
     heros = []; // int [] ying xiong
     hand = new Deck() // shou pai
     equip = new Deck() // zhuang bei
     cast = new Deck() // pan ding
     clientId =0; //socket id
 }
-export class Table {
+class Table {
     seats = [] //8 players
     clinets = new Map(); //<clientId, seatid>
     draw = new Deck()
@@ -21,3 +22,9 @@ export class Table {
     }
     
 }
+
+module.exports = { 
+    Deck:Deck,
+    Table:Table, 
+    Seat:Seat
+};

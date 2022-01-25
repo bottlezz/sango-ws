@@ -1,16 +1,21 @@
-import {Table} from './game.js';
+const {Table} = require('./game.js');
 
-export class TableManager{
+class TableManager{
     tables = new Map();
     idSeed=1;
 
     newTable(){
-        var t = new Table();
-        this.tables.set(this.idSeed, t);
+        var table = new Table();
+        this.tables.set(this.idSeed, table);
         this.idSeed++;
-        return t;
+        return table;
     }
+    
     getTableById(id){
         return this.tables.get(id);
     }
+}
+
+module.exports ={
+    TableManager:TableManager
 }
