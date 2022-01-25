@@ -1,17 +1,14 @@
 const express = require('express');
-const { WebSocketServer } = require('ws');
+const { Server } = require('ws');
 
 const PORT = process.env.PORT || 3000;
-const server = express();
-server.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const INDEX = '/index.html';
 
-server.listen(PORT, () => {
-  console.log(`Example app listening at http://localhost:${PORT}`)
-})
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-const wss = new WebSocketServer({ server });
+const wss = new Server({ server });
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
